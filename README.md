@@ -24,6 +24,4 @@ Check out the live demo of the JSON Clock [here](https://your-demo-link.com).
 
 ## 🛠 Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/json-clock.git
+1. https://kauacodex.github.io/jc
