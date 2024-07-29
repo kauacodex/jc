@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Clock</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: rgba(0, 0, 0, 0.5) url('https://wallpapers.com/images/high/purple-galaxy-1920-x-1080-background-g19zxj2658cpy7nd.webp') no-repeat center center fixed;
+      background-size: cover;
+      color: #ffffff;
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+    .clock-container {
+      background: rgba(40, 42, 54, 0.9);
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      text-align: left;
+      position: relative;
+      transform: perspective(1000px) rotateY(10deg);
+      transition: transform 0.5s, box-shadow 0.5s;
+    }
+    .clock-container:hover {
+      transform: perspective(1000px) rotateY(0deg);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+    }
+    .title {
+      font-size: 24px;
+      color: #ff79c6;
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(40, 42, 54, 0.9);
+      padding: 5px 15px;
+      border-radius: 5px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+    .json {
+      font-size: 20px;
+      white-space: pre-wrap;
+      line-height: 1.5;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: background 0.5s, box-shadow 0.5s;
+    }
+    .json-key {
+      color: #ff79c6;
+    }
+    .json-string {
+      color: #f1fa8c;
+    }
+    .json-number {
+      color: #bd93f9;
+    }
+    .json-boolean {
+      color: #50fa7b;
+    }
+    .json-null {
+      color: #8be9fd;
+    }
+    .json-brace {
+      color: #ff79c6;
+    }
+    .json-colon {
+      color: #f8f8f2;
+    }
+    .json-comma {
+      color: #f8f8f2;
+    }
+    .json:hover {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="clock-container">
+    <div class="title">JSON Clock</div>
+    <pre class="json" id="json-clock"></pre>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours() % 12 || 12).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      const am_pm = now.getHours() >= 12 ? 'PM' : 'AM';
+      const day = String(now.getDate()).padStart(2, '0');
+      const week = String(Math.ceil(now.getDate() / 7)).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const year = now.getFullYear();
+
+      const clockData = {
+        "time": {
+          "hours": hours,
+          "minutes": minutes,
+          "seconds": seconds,
+          "period": am_pm
+        },
+        "date": {
+          "day": day,
+          "week": week,
+          "month": month,
+          "year": year
+        }
+      };
+
+      document.getElementById('json-clock').innerHTML = syntaxHighlight(JSON.stringify(clockData, null, 2));
+    }
+
+    function syntaxHighlight(json) {
+      json = json.replace(/(&|<|>|"|')/g, function (match) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        }[match];
+      });
+      return json.replace(/({|}|\[|\]|:|,|"(\\u[\da-fA-F]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(\.\d*)?([eE][+-]?\d+)?)/g, function (match) {
+        let cls = 'json-number';
+        if (/^"/.test(match)) {
+          if (/:$/.test(match)) {
+            cls = 'json-key';
+          } else {
+            cls = 'json-string';
+          }
+        } else if (/true|false/.test(match)) {
+          cls = 'json-boolean';
+        } else if (/null/.test(match)) {
+          cls = 'json-null';
+        } else if (/({|}|\[|\])/.test(match)) {
+          cls = 'json-brace';
+        } else if (/:/.test(match)) {
+          cls = 'json-colon';
+        } else if (/,/.test(match)) {
+          cls = 'json-comma';
+        }
+        return `<span class="${cls}">${match}</span>`;
+      });
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock(); // initial call
+  </script>
+</body>
+</html>
