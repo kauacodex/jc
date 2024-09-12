@@ -25,6 +25,6 @@ Check out the live demo of the JSON Clock [here](https://your-demo-link.com).
 - Updates every second to keep the time accurate.
 - Easy to set up and customize.
 
-## 🛠 Installation
+## 🛠 Acess
 
 1. https://kauacodex.github.io/jc
