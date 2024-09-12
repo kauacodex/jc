@@ -16,7 +16,7 @@ Welcome to the JSON Clock project! This project showcases a beautiful clock with
 
 ## 🎥 Demo
 
-Check out the live demo of the JSON Clock [here](https://your-demo-link.com).
+Check out the live demo of the JSON Clock [here](https://kauacodex.github.io/jc).
 
 ## 🌟 Features
 
