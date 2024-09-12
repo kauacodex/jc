@@ -3,43 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Página Interativa</title>
+    <title>Efeitos Visuais</title>
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .gradient-background {
+            width: 100%;
             height: 100vh;
-            background: #f0f0f0;
+            background: linear-gradient(45deg, #ff0000, #0000ff);
+            background-size: 400% 400%;
+            animation: gradient 10s ease infinite;
         }
-        .container {
-            text-align: center;
-        }
-        .animated-button {
-            padding: 15px 30px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            background: #3498db;
-            color: #fff;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
-        }
-        .animated-button:hover {
-            background: #2980b9;
-            transform: scale(1.05);
-        }
-        .animated-button:active {
-            background: #1c598a;
+        @keyframes gradient {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Bem-vindo à Minha Página Interativa!</h1>
-        <button class="animated-button">Clique Aqui</button>
-    </div>
+    <div class="gradient-background"></div>
 </body>
 </html>
