@@ -1,3 +1,18 @@
+<style>
+@keyframes gradient {
+  0% { background: linear-gradient(45deg, #ff0000, #0000ff); }
+  50% { background: linear-gradient(45deg, #00ff00, #ff00ff); }
+  100% { background: linear-gradient(45deg, #ff0000, #0000ff); }
+}
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(45deg, #ff0000, #0000ff);
+  animation: gradient 10s ease infinite;
+}
+</style>
+
+
 # 🕒 JSON Clock with Dracula Theme
 
 Welcome to the JSON Clock project! This project showcases a beautiful clock with a Dracula theme, displaying the current time and date in JSON format. The clock updates every second to ensure the time is always accurate. Created in just 5 minutes, this project is a quick and fun way to demonstrate how to work with time data in JavaScript and style it with CSS. ⏰✨
@@ -25,16 +40,3 @@ Check out the live demo of the JSON Clock [here](https://your-demo-link.com).
 ## 🛠 Installation
 
 1. https://kauacodex.github.io/jc
-<style>
-@keyframes gradient {
-  0% { background: linear-gradient(45deg, #ff0000, #0000ff); }
-  50% { background: linear-gradient(45deg, #00ff00, #ff00ff); }
-  100% { background: linear-gradient(45deg, #ff0000, #0000ff); }
-}
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(45deg, #ff0000, #0000ff);
-  animation: gradient 10s ease infinite;
-}
-</style>
