@@ -27,4 +27,5 @@ Check out the live demo of the JSON Clock [here](https://kauacodex.github.io/jc)
 
 ## 🛠 Acess
 
-1. https://kauacodex.github.io/jc
+1. https://zKauaFerreira.github.io/jc
+
